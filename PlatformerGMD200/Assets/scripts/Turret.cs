@@ -21,7 +21,11 @@ public class Turret : MonoBehaviour
         direction.Normalize();
         float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
         //rotPoint.transform.rotation = Quaternion.Euler(Vector3.forward * angle);
-        turHead.transform.RotateAround(rotPoint.position, Vector3.forward, angle);
+        if(player.isMoving == true)
+        {
+            turHead.transform.RotateAround(rotPoint.position, direction, angle * Time.deltaTime);
+        }
+        
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

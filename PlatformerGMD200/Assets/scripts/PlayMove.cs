@@ -13,20 +13,30 @@ public class PlayMove : MonoBehaviour
     public LayerMask groundLayer;
     private bool isCol, sideCol1, sideCol2;
     public Transform sideStick1, sideStick2;
-    public bool isGrounded;
+    public bool isGrounded, isMoving;
     public Transform checkPoint;
+    public SceneChange sceneChanger;
     // Start is called before the first frame update
     void Start()
     {
         speed = 5f;
         jumpForce = 400f;
         rb = GetComponent<Rigidbody2D>();
+        isMoving = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         xMoveIn = Input.GetAxis("Horizontal") * speed;
+        if(xMoveIn < 0.001)
+        {
+            isMoving = false;
+        }
+        else
+        {
+            isMoving = true;
+        }
         if(Input.GetKeyDown(KeyCode.Space))
         {
             canJump = true;
@@ -75,6 +85,11 @@ public class PlayMove : MonoBehaviour
         else if(other.gameObject.CompareTag("checkpoint"))
         {
             checkPoint = other.transform;
+        }
+        if(other.gameObject.CompareTag("goal"))
+        {
+            //change the scene
+            sceneChanger.SwitchScene();
         }
     }
     private void Respawn()
