@@ -22,11 +22,11 @@ public class Timer : MonoBehaviour
         seconds = timeHolder.timeElapsed - minutes * 60;
         if(seconds > 10)
         {
-            timeDisp.text = minutes.ToString() + ":" + seconds.ToString();
+            timeDisp.text = "Elapsed time: " + minutes.ToString() + ":" + seconds.ToString();
         }
         else
         {
-            timeDisp.text = minutes.ToString() + ":0" + seconds.ToString();
+            timeDisp.text = "Elapsed time: " + minutes.ToString() + ":0" + seconds.ToString();
         }
         
         if (canAdd )
