@@ -41,6 +41,10 @@ public class PlayMove : MonoBehaviour
         {
             canJump = true;
         }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Respawn();
+        }
         isGrounded = isCol;
     }
     private void FixedUpdate()

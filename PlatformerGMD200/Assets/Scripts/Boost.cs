@@ -11,11 +11,20 @@ public class Boost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && canBoost == true)
+        if(Input.GetKeyDown(KeyCode.Q) && canBoost == true)
         {
-            Debug.Log("click worked");
-            Vector3 mousePos = (Vector3)cam.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 boostDir = mousePos - player.transform.position;
+            Vector3 boostDir = player.transform.localScale;
+            boostDir.x = -Mathf.Abs(player.transform.localScale.x);
+            boostDir.Normalize();
+            boostDir.x *= 20;
+            player.GetComponent<Rigidbody2D>().AddForce(boostDir * force);
+            canBoost = false;
+            StartCoroutine(boostDelay(1.5f));
+        }
+        else if(Input.GetKeyDown(KeyCode.E) && canBoost == true)
+        {
+            Vector3 boostDir = player.transform.localScale;
+            boostDir.x = Mathf.Abs(player.transform.localScale.x);
             boostDir.Normalize();
             boostDir.x *= 20;
             player.GetComponent<Rigidbody2D>().AddForce(boostDir * force);
